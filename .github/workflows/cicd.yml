@@ -1,7 +1,31 @@
 name: Deploy Node Application
 
 on:
-    push:
-        branches: [ main ]
-    pull_request:
-        branches: [ main ]
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Login to Docker Hub
+        run: echo `${{ secrets.DOCKER_PASSWORD }}` | docker login -u `${{ secrets.DOCKER_USERNAME }}` --password-stdin
+      - name: Build Docker Image
+        run: docker build -t ahtashammustafa/nodejs-app
+      - name: Publish Image to docker hub
+        run: docker push ahtashammustafa/nodejs-app:latest
+
+  deploy:  
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull Image from docker hub
+        run: docker pull ahtashammustafa/nodejs-app:latest
+      - name: Run Docker Container
+        run: docker run -d -p 8000:8000 --name nodejs-app-container \
+          -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+          -e JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} \
+          ahtashammustafa/nodejs-app
