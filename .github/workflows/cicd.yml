@@ -26,6 +26,6 @@ jobs:
         run: docker pull ahtashammustafa/nodejs-app:latest
       - name: Run Docker Container
         run: docker run -d -p 8000:8000 --name nodejs-app-container \
-          -e DATABASE_URL="mongodb+srv://***realestate.97jy373.mongodb.net/realestate?retryWrites=true&w=majority&appName=RealEstate" \
+          -e DATABASE_URL="mongodb+srv://ahtshammustufa786:rgpEhkXQZaSCz9M1@realestate.97jy373.mongodb.net/realestate?retryWrites=true&w=majority&appName=RealEstate" \
           -e JWT_SECRET_KEY="shami" \
           ahtashammustafa/nodejs-app
