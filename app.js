@@ -17,6 +17,10 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
+
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
 app.use('/api/posts', postRoute)
@@ -25,7 +29,6 @@ app.use('/api/messages', messageRoute)
 app.use('/api/test', testRoute)
 
 app.listen(8000,()=>{
-    res.send("File is running")
     console.log("server is running on port 8000");
 })
 
