@@ -25,6 +25,7 @@ app.use('/api/messages', messageRoute)
 app.use('/api/test', testRoute)
 
 app.listen(8000,()=>{
+    res.send("File is running")
     console.log("server is running on port 8000");
 })
 
