@@ -25,4 +25,8 @@ jobs:
       - name: Pull Image from docker hub
         run: docker pull ahtashammustafa/realestate-app:latest
       - name: Run Docker Container
-        run: docker run -d -p 8000:8000 --name realestate-app-container -e DATABASE_URL="${{secrets.DATABASE_URL}}" -e JWT_SECRET_KEY="${{secrets.JWT_SECRET_KEY}}" ahtashammustafa/realestate-app
+        run: |
+          docker run -d -p 8000:8000 --name nodejs-app-container \
+          -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+          -e JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}" \
+          ahtashammustafa/realestate-app
