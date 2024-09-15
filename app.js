@@ -24,6 +24,11 @@ app.use('/api/posts', postRoute)
 app.use('/api/chats', chatRoute)
 app.use('/api/messages', messageRoute)
 app.use('/api/test', testRoute)
+app.use('/api/hello', (req,res)=>{
+    res.send("hello")
+})
+
+
 
 app.listen(8000,()=>{
     console.log("server is running on port 8000");
